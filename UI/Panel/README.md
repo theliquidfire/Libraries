@@ -17,13 +17,13 @@ In this setup example, we configure a `Panel` to be able to show in the lower ri
 
 1. Set the `Position List` `Size` to `2`
 2. For the first position:
-  - `Name`: "Hide"
-  - `My Anchor`: `Lower Left`
-  - `Parent Anchor`: `Lower Right`
+    - `Name`: "Hide"
+    - `My Anchor`: `Lower Left`
+    - `Parent Anchor`: `Lower Right`
 3. For the second position:
-  - `Name`: "Show"
-  - `My Anchor`: `Lower Right`
-  - `Parent Anchor`: `Lower Right`
+    - `Name`: "Show"
+    - `My Anchor`: `Lower Right`
+    - `Parent Anchor`: `Lower Right`
   
  Note that you can also specify a non-zero offset per position so that your panel isn't required to be exactly on the edges.
   
@@ -32,15 +32,33 @@ In this setup example, we configure a `Panel` to be able to show in the lower ri
 Import the namespace where required:
 
 ```csharp
-using TheLiquidFire.DataTypes;
+using TheLiquidFire.UI;
 ```
+
+### Without Animation
 
 Obtain a reference to a `Panel` (here named "panel"), then `SetPosition` based on the position name you configured in the Setup step.  Pass a bool to determine whether the change should be animated:
 
 ```csharp
 // When ready to apply Show position
-panel.SetPosition("Show", true);
+panel.SetPosition("Show", false);
 
 // When ready to apply Hide position
-panel.SetPosition("Hide", true);
+panel.SetPosition("Hide", false);
+```
+
+### With Animation
+
+Additionally import the namespace where required:
+
+```csharp
+using TheLiquidFire.Animation;
+```
+
+The animation of a `Panel` is driven by my dynamic animation library.  You may optionally grab a reference to a returned `Tweener` and edit any animation values you like:
+
+```csharp
+var tweener = panel.SetPosition("Show", true);
+tweener.duration = 0.25f;
+tweener.equation = EasingEquations.EaseOutBack;
 ```
